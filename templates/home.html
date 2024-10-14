@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}Our TODO list{% endblock %}
+
+{% block content %}
+<h1>Välkommen till vår TODO lista</h1>
+<p>Välj en lista nedan för att se vad som behöver göras:</p>
+<a href="{{ url_for('todo1') }}" class="button">Shopping lista</a>
+<a href="{{ url_for('todo2') }}" class="button">Att göra</a>
+{% endblock %}

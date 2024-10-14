@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('home') }}" class="button">Home</a>
+<h1>{{ page_title }}</h1>
+<ul id="active-tasks">
+    {% for task_id, task, timestamp in active_tasks %}
+    <li data-id="{{ task_id }}">
+        {{ task }}
+        <span class="timestamp">(Created: {{ timestamp }})</span>
+        <div class="task-actions">
+            <a href="{{ url_for('complete_task', page=page, task_id=task_id) }}" class="complete-btn">Complete</a>
+            <a href="{{ url_for('delete_task', page=page, task_id=task_id) }}" class="delete-btn">Delete</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<form action="{{ url_for('add_task', page=page) }}" method="post">
+    <input type="text" name="task" placeholder="Enter a new task" required>
+    <input type="submit" value="Add Task">
+</form>
+
+<div id="completed-tasks">
+    <h2>Completed Tasks</h2>
+    <ul>
+        {% for task_id, task, timestamp in completed_tasks %}
+        <li>
+            {{ task }}
+            <span class="timestamp">(Completed: {{ timestamp }})</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
